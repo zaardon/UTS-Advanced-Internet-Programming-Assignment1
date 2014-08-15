@@ -7,5 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div id=”footer”>
-Alex Smith 11303563
+    <table style="width:100%;" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td>
+                    Copyright: Alexander Smith 11303563
+                </td>
+            </tr>      
+    </table>
 </div>

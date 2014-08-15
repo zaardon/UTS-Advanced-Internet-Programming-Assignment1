@@ -13,7 +13,9 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <h1>Hello World!</h1>
+        
+        <h1>Create a Detention</h1>
+        
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
