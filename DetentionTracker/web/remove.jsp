@@ -16,6 +16,20 @@
         
         <h1>Check-off a Detention</h1>
         
+                <p>
+            <table align="center" border="2" style="width:75%" >
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th> 
+              <th>Year</th>
+              <th>Type</th>
+              <th>Department</th>
+              <th>Reason</th>
+              <th style="width: 5px">Remove?</th>
+            </tr>
+            </table>
+        </p>
+        
         <jsp:include page="footer.jsp"/>
     </body>
 </html>

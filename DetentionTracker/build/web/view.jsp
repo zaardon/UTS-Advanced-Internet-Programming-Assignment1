@@ -16,6 +16,20 @@
         
         <h1>View Detentions</h1>
         
+        <p>
+            <table align="center" border="2" style="width:75%" >
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th> 
+              <th>Year</th>
+              <th>Type</th>
+              <th>Department</th>
+              <th>Reason</th>
+              <th style="width: 5px">Edit?</th>
+            </tr>
+            </table>
+        </p>
+        
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
