@@ -25,7 +25,7 @@
         try{
             Detention detention = new Detention();
             detention.setFName(request.getParameter("fname"));
-            detention.setLName(request.getParameter("lanme"));
+            detention.setLName(request.getParameter("lname"));
             detention.setYear(Integer.parseInt(request.getParameter("year")));
             detention.setType(request.getParameter("type"));
             detention.setDept(request.getParameter("dept"));

@@ -3,20 +3,33 @@
     Created on : 14/08/2014, 8:39:52 PM
     Author     : Alex
 --%>
-
+<%@page import="au.edu.uts.aip.detentiontracker.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>View Detentions</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
         
-        <h1>Check-off a Detention</h1>
+        <h1>View Detentions</h1>
         
-                <p>
+        <% DetentionList dList = (DetentionList)session.getAttribute("dList");
+        if (dList == null){
+            dList = new DetentionList();
+            session.setAttribute("dList", dList);
+        }       
+        %>
+
+        <p>
+        <%if (null == dList.getDetentions()){
+                %>No current detentions </p>
+        <% } 
+         else {
+                %>
+            
             <table align="center" border="2" style="width:75%" >
             <tr>
               <th>First Name</th>
@@ -27,6 +40,19 @@
               <th>Reason</th>
               <th style="width: 5px">Remove?</th>
             </tr>
+            <% for(Detention current : dList.getDetentions()){
+
+            %>
+            <tr>
+                <td><%=current.getFName() %></td>
+                <td><%=current.getLName() %></td>
+                <td><%=current.getYear()%></td>
+                <td><%=current.getType()%></td>
+                <td><%=current.getDept()%></td>
+                <td><%=current.getReason()%></td>
+            </tr>
+            <% }
+        } %>
             </table>
         </p>
         
