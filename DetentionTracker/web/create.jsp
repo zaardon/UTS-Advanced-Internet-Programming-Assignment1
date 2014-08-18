@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Create a Detention</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>     
@@ -17,7 +17,7 @@
         <div>
             <form align="center" name="input" action="view.jsp" method="get">
                 First Name: <input type="text" name="fname" > <br>
-                Last Name: <input type="text" name="sname"> <br>
+                Last Name: <input type="text" name="lname"> <br>
                 Year: <select name="year">
                     <option value="07">07</option>
                     <option value="08">08</option>
