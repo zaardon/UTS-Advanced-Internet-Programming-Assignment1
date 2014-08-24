@@ -1,12 +1,53 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+template="/WEB-INF/templates/header.xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
 
+<ui:define name="title">
+Edit a Detention
+</ui:define>
+    <f:metadata>
+        <f:viewAction action="#{detentionController.loadDetention(param.index)}"/>
+    </f:metadata>
+    
+    <ui:define name="content">
+    <h:body>
+        <h1>Edit a Detention</h1>        
+        <div align="center">
+            <h:form>
+                <p>First Name: <h:inputText id="fname" value="#{detentionController.detention.FName}" validatorMessage="You must enter a first name"/> </p>
+                <p>Last Name: <h:inputText id="sname" value="#{detentionController.detention.LName}" validatorMessage="You must enter a last name"/> </p> 
+                <p>Year: <h:selectOneMenu value="#{detentionController.detention.year}">
+                    <f:selectItem itemValue="07" itemLabel="07"/>
+                    <f:selectItem itemValue="08" itemLabel="08"/>
+                    <f:selectItem itemValue="09" itemLabel="09"/>
+                    <f:selectItem itemValue="10" itemLabel="10"/>
+                    <f:selectItem itemValue="11" itemLabel="11"/>
+                    <f:selectItem itemValue="12" itemLabel="12"/>
+                </h:selectOneMenu></p>
+                <p>Type of Detention: <h:selectOneMenu value="#{detentionController.detention.type}">
+                    <f:selectItem itemValue="afternoon" itemLabel="Afternoon"/>
+                    <f:selectItem itemValue="morning" itemLabel="Morning"/>
+                    <f:selectItem itemValue="saturday" itemLabel="Saturday"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="Lunchtime"/>
+                </h:selectOneMenu></p>
+                <p>Department: <h:selectOneMenu value="#{detentionController.detention.dept}">
+                    <f:selectItem itemValue="afternoon" itemLabel="Computing"/>
+                    <f:selectItem itemValue="morning" itemLabel="Math"/>
+                    <f:selectItem itemValue="saturday" itemLabel="English"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="Science"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="HSIE"/>
+                </h:selectOneMenu></p>
+                <p>Reason: <h:inputText id="reason" value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason"/> </p>
+                
+                <h:inputHidden value="#{detentionController.detention.id}"/>
+                <h:commandButton value="Edit" action="#{detentionController.editDetention()}"/>
+                <h:button value="Cancel" outcome="cancel"/>
+            </h:form>
+        </div>       
+    </h:body>
+    </ui:define>>
+</ui:composition>

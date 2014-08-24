@@ -50,8 +50,13 @@ public class DetentionController implements Serializable {
      * Delete the record from the database that matches the current detention's database id.
      * @return a redirect to view the whole waiting list
      */
+    public String removeDetention(int detention) {
+        DetentionListDatabase.delete(detention);
+        return "view?faces-redirect=true";
+    }
+    
     public String removeDetention() {
         DetentionListDatabase.delete(detention.getId());
         return "view?faces-redirect=true";
-    }
+    }    
 }
