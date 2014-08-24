@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+template="/WEB-INF/templates/header.xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:define name="title">
+Create a Detention
+</ui:define>
+    <ui:define name="content">
+    <h:body>
+        <h1>Create a Detention</h1>        
+        <div align="center">
+            <h:form>
+                <p>First Name: <h:inputText value="#{detentionController.detention.FName}"/> </p>
+                <p>Last Name: <h:inputText value="#{detentionController.detention.LName}"/></p> 
+                <p>Year: <h:selectOneMenu value="#{detentionController.detention.year}">
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </h:selectOneMenu></p>
+                <p>Type of Detention: <h:selectOneMenu value="#{detentionController.detention.type}">
+                    <option value="afternoon">Afternoon</option>
+                    <option value="morning">Morning</option>
+                    <option value="saturday">Saturday</option>
+                    <option value="lunchtime">Lunchtime</option>
+                </h:selectOneMenu></p>
+                <p>Department: <h:selectOneMenu value="#{detentionController.detention.dept}">
+                    <option value="afternoon">Computing</option>
+                    <option value="morning">Math</option>
+                    <option value="saturday">English</option>
+                    <option value="lunchtime">Science</option>
+                    <option value="lunchtime">HSIE</option>
+                </h:selectOneMenu></p>
+                <p>Reason: <h:inputText value="#{detentionController.detention.reason}"/></p>
+                
+                <h:commandButton value="Create" action="create"/>
+            </h:form>
+        </div>       
+    </h:body>
+    </ui:define>>
+</ui:composition>
