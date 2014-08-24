@@ -8,10 +8,12 @@
         <navigation-case>
             <from-outcome>create</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -19,10 +21,12 @@
         <navigation-case>
             <from-outcome>edit</from-outcome>
             <to-view-id>/edit.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>remove</from-outcome>
             <to-view-id>/remove.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -30,10 +34,12 @@
         <navigation-case>
             <from-outcome>save</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -41,10 +47,12 @@
         <navigation-case>
             <from-outcome>cancel</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>confirm</from-outcome>
             <to-view-id>/view.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 </faces-config>

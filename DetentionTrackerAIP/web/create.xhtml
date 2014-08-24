@@ -3,7 +3,8 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 template="/WEB-INF/templates/header.xhtml"
-xmlns:h="http://xmlns.jcp.org/jsf/html">
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:define name="title">
 Create a Detention
@@ -16,29 +17,29 @@ Create a Detention
                 <p>First Name: <h:inputText value="#{detentionController.detention.FName}"/> </p>
                 <p>Last Name: <h:inputText value="#{detentionController.detention.LName}"/></p> 
                 <p>Year: <h:selectOneMenu value="#{detentionController.detention.year}">
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
+                    <f:selectItem itemValue="07" itemLabel="07"/>
+                    <f:selectItem itemValue="08" itemLabel="08"/>
+                    <f:selectItem itemValue="09" itemLabel="09"/>
+                    <f:selectItem itemValue="10" itemLabel="10"/>
+                    <f:selectItem itemValue="11" itemLabel="11"/>
+                    <f:selectItem itemValue="12" itemLabel="12"/>
                 </h:selectOneMenu></p>
                 <p>Type of Detention: <h:selectOneMenu value="#{detentionController.detention.type}">
-                    <option value="afternoon">Afternoon</option>
-                    <option value="morning">Morning</option>
-                    <option value="saturday">Saturday</option>
-                    <option value="lunchtime">Lunchtime</option>
+                    <f:selectItem itemValue="afternoon" itemLabel="Afternoon"/>
+                    <f:selectItem itemValue="morning" itemLabel="Morning"/>
+                    <f:selectItem itemValue="saturday" itemLabel="Saturday"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="Lunchtime"/>
                 </h:selectOneMenu></p>
                 <p>Department: <h:selectOneMenu value="#{detentionController.detention.dept}">
-                    <option value="afternoon">Computing</option>
-                    <option value="morning">Math</option>
-                    <option value="saturday">English</option>
-                    <option value="lunchtime">Science</option>
-                    <option value="lunchtime">HSIE</option>
+                    <f:selectItem itemValue="afternoon" itemLabel="Computing"/>
+                    <f:selectItem itemValue="morning" itemLabel="Math"/>
+                    <f:selectItem itemValue="saturday" itemLabel="English"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="Science"/>
+                    <f:selectItem itemValue="lunchtime" itemLabel="HSIE"/>
                 </h:selectOneMenu></p>
                 <p>Reason: <h:inputText value="#{detentionController.detention.reason}"/></p>
                 
-                <h:commandButton value="Create" action="create"/>
+                <h:commandButton value="Create" action="#{detentionController.createDetention()}"/>
             </h:form>
         </div>       
     </h:body>
