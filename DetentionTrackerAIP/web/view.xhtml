@@ -13,6 +13,7 @@ View Detentions
     <h:body>
         <h1>View Detentions</h1>        
         <div align="center">
+            <h:form>
             <h:dataTable border="1" var="detention"  value="#{detentionListController.detentions}">
             <h:column>
                 <f:facet name="header">
@@ -64,10 +65,12 @@ View Detentions
             </h:column> 
                 
             <h:column>
-                <h:button value="Remove" outcome="#{detentionController.removeDetention(detention.id)}"/>
+                <h:commandButton value="Remove" action="#{detentionController.removeDetention(detention.id)}" />
+            
             </h:column>        
                 
         </h:dataTable>
+            </h:form>
         </div>       
     </h:body>
     </ui:define>
