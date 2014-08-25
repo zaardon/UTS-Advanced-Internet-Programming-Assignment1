@@ -20,4 +20,8 @@ public class DetentionListController implements Serializable {
         return DetentionListDatabase.findAll();
     }
     
+    public int sizeOfDetentionList(){
+        return getDetentions().size();
+    }
+    
 }

@@ -4,17 +4,19 @@
 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 template="/WEB-INF/templates/header.xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
-xmlns:f="http://xmlns.jcp.org/jsf/core">
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <ui:define name="title">
 View Detentions
 </ui:define>
     <ui:define name="content">
     <h:body>
-        <h1>View Detentions</h1>        
+        <h1>Current Detentions</h1>        
         <div align="center">
-            <h:form>
-            <h:dataTable border="1" var="detention"  value="#{detentionListController.detentions}">
+            
+            <h:form rendered="#{detentionListController.sizeOfDetentionList() != 0}">
+                <h:dataTable border="1" var="detention"  value="#{detentionListController.detentions}">
             <h:column>
                 <f:facet name="header">
                     First Name
@@ -68,9 +70,9 @@ View Detentions
                 <h:commandButton value="Remove" action="#{detentionController.removeDetention(detention.id)}" />
             
             </h:column>        
-                
         </h:dataTable>
             </h:form>
+            <h:outputText rendered="#{detentionListController.sizeOfDetentionList() == 0}" value="No detentions to view!" />
         </div>       
     </h:body>
     </ui:define>

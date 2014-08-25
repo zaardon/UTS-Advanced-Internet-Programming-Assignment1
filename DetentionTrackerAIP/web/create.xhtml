@@ -11,37 +11,61 @@ Create a Detention
 </ui:define>
     <ui:define name="content">
     <h:body>
-        <h1>Create a Detention</h1>        
-        <div align="center">
-            <h:form>
-                <p>First Name: <h:inputText value="#{detentionController.detention.FName}"/> </p>
-                <p>Last Name: <h:inputText value="#{detentionController.detention.LName}"/></p> 
-                <p>Year: <h:selectOneMenu value="#{detentionController.detention.year}">
+        <h1>Create a Detention</h1>               
+<h:form>
+    <div align="center">
+    <table>
+        <tr>
+            <td><h:outputText value="First Name: " /></td>
+            <td><h:inputText value="#{detentionController.detention.FName}"/> </td>
+        </tr>
+        <tr>
+            <td><h:outputText value="Last Name: " /></td>
+            <td><h:inputText value="#{detentionController.detention.LName}"/></td>
+        </tr>
+        <tr>
+            <td><h:outputText value="Year: " /></td>
+            <td><h:selectOneMenu value="#{detentionController.detention.year}">
                     <f:selectItem itemValue="07" itemLabel="07"/>
                     <f:selectItem itemValue="08" itemLabel="08"/>
                     <f:selectItem itemValue="09" itemLabel="09"/>
                     <f:selectItem itemValue="10" itemLabel="10"/>
                     <f:selectItem itemValue="11" itemLabel="11"/>
                     <f:selectItem itemValue="12" itemLabel="12"/>
-                </h:selectOneMenu></p>
-                <p>Type of Detention: <h:selectOneMenu value="#{detentionController.detention.type}">
+                </h:selectOneMenu></td>
+        </tr>
+        <tr>
+            <td><h:outputText value="Type of Detention: " /></td>
+            <td><h:selectOneMenu value="#{detentionController.detention.type}">
                     <f:selectItem itemValue="Afternoon" itemLabel="Afternoon"/>
                     <f:selectItem itemValue="Morning" itemLabel="Morning"/>
                     <f:selectItem itemValue="Saturday" itemLabel="Saturday"/>
                     <f:selectItem itemValue="Lunchtime" itemLabel="Lunchtime"/>
-                </h:selectOneMenu></p>
-                <p>Department: <h:selectOneMenu value="#{detentionController.detention.dept}">
+                </h:selectOneMenu></td>
+        </tr>
+        <tr>
+            <td><h:outputText value="Department: " /></td>
+            <td><h:selectOneMenu value="#{detentionController.detention.dept}">
                     <f:selectItem itemValue="Computing" itemLabel="Computing"/>
                     <f:selectItem itemValue="Math" itemLabel="Math"/>
                     <f:selectItem itemValue="English" itemLabel="English"/>
                     <f:selectItem itemValue="Science" itemLabel="Science"/>
                     <f:selectItem itemValue="HSIE" itemLabel="HSIE"/>
-                </h:selectOneMenu></p>
-                <p>Reason: <h:inputText value="#{detentionController.detention.reason}"/></p>
-                
-                <h:commandButton value="Create" action="#{detentionController.createDetention()}"/>
-            </h:form>
-        </div>       
+                </h:selectOneMenu></td>
+        </tr>
+        <tr>
+            <td><h:outputText value="Reason: " /></td>
+            <td><h:inputText value="#{detentionController.detention.reason}"/></td>
+        </tr>
+        <tr>
+        <td> </td>
+        <td><h:commandButton value="Create" action="#{detentionController.createDetention()}"/>
+        </td>
+        </tr>
+    </table>
+    </div>
+</h:form>
+        
     </h:body>
-    </ui:define>>
+    </ui:define>
 </ui:composition>
