@@ -17,15 +17,17 @@ Create a Detention
     <table>
         <tr>
             <td><h:outputText value="First Name: " /></td>
-            <td><h:inputText value="#{detentionController.detention.FName}"/> </td>
+            <td><h:inputText id="fname" value="#{detentionController.detention.FName}" validatorMessage="You must enter a valid first name!"/> </td>
+            <td><h:message for="fname"/></td>
         </tr>
         <tr>
             <td><h:outputText value="Last Name: " /></td>
-            <td><h:inputText value="#{detentionController.detention.LName}"/></td>
+            <td><h:inputText id="lname" value="#{detentionController.detention.LName}" validatorMessage="You must enter a valid last name!"/></td>
+            <td><h:message for="lname" /></td>
         </tr>
         <tr>
             <td><h:outputText value="Year: " /></td>
-            <td><h:selectOneMenu value="#{detentionController.detention.year}">
+            <td><h:selectOneMenu value="#{detentionController.detention.year}" >
                     <f:selectItem itemValue="07" itemLabel="07"/>
                     <f:selectItem itemValue="08" itemLabel="08"/>
                     <f:selectItem itemValue="09" itemLabel="09"/>
@@ -55,7 +57,8 @@ Create a Detention
         </tr>
         <tr>
             <td><h:outputText value="Reason: " /></td>
-            <td><h:inputText value="#{detentionController.detention.reason}"/></td>
+            <td><h:inputText id="reason" value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason!"/></td>
+            <td><h:message for="reason"/></td>
         </tr>
         <tr>
         <td> </td>

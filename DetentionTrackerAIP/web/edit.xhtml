@@ -16,38 +16,66 @@ Edit a Detention
     <ui:define name="content">
     <h:body>
         <h1>Edit a Detention</h1>        
-        <div align="center">
+
             <h:form>
-                <p>First Name: <h:inputText id="fname" value="#{detentionController.detention.FName}" validatorMessage="You must enter a first name"/> </p>
-                <p>Last Name: <h:inputText id="sname" value="#{detentionController.detention.LName}" validatorMessage="You must enter a last name"/> </p> 
-                <p>Year: <h:selectOneMenu value="#{detentionController.detention.year}">
-                    <f:selectItem itemValue="07" itemLabel="07"/>
-                    <f:selectItem itemValue="08" itemLabel="08"/>
-                    <f:selectItem itemValue="09" itemLabel="09"/>
-                    <f:selectItem itemValue="10" itemLabel="10"/>
-                    <f:selectItem itemValue="11" itemLabel="11"/>
-                    <f:selectItem itemValue="12" itemLabel="12"/>
-                </h:selectOneMenu></p>
-                <p>Type of Detention: <h:selectOneMenu value="#{detentionController.detention.type}">
-                    <f:selectItem itemValue="afternoon" itemLabel="Afternoon"/>
-                    <f:selectItem itemValue="morning" itemLabel="Morning"/>
-                    <f:selectItem itemValue="saturday" itemLabel="Saturday"/>
-                    <f:selectItem itemValue="lunchtime" itemLabel="Lunchtime"/>
-                </h:selectOneMenu></p>
-                <p>Department: <h:selectOneMenu value="#{detentionController.detention.dept}">
-                    <f:selectItem itemValue="afternoon" itemLabel="Computing"/>
-                    <f:selectItem itemValue="morning" itemLabel="Math"/>
-                    <f:selectItem itemValue="saturday" itemLabel="English"/>
-                    <f:selectItem itemValue="lunchtime" itemLabel="Science"/>
-                    <f:selectItem itemValue="lunchtime" itemLabel="HSIE"/>
-                </h:selectOneMenu></p>
-                <p>Reason: <h:inputText id="reason" value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason"/> </p>
+                <div align="center">
+                <table>
+                    <tr>
+                        <td><h:outputText value="First Name: " /></td>
+                        <td><h:inputText id="fname" value="#{detentionController.detention.FName}" 
+                                         validatorMessage="You must enter a first name!"/> </td>
+                    </tr>
+                    <tr>
+                        <td><h:outputText value="Last Name: " /></td>
+                        <td><h:inputText id="sname" value="#{detentionController.detention.LName}" 
+                                         validatorMessage="You must enter a last name"/></td>
+                    </tr>
+
+                    <tr>
+                        <td><h:outputText value="Year: " /></td>
+                        <td><h:selectOneMenu value="#{detentionController.detention.year}" validatorMessage="You must enter a year group!">
+                            <f:selectItem itemValue="07" itemLabel="07"/>
+                            <f:selectItem itemValue="08" itemLabel="08"/>
+                            <f:selectItem itemValue="09" itemLabel="09"/>
+                            <f:selectItem itemValue="10" itemLabel="10"/>
+                            <f:selectItem itemValue="11" itemLabel="11"/>
+                            <f:selectItem itemValue="12" itemLabel="12"/>
+                        </h:selectOneMenu></td>
+                    </tr>              
                 
-                <h:inputHidden value="#{detentionController.detention.id}"/>
-                <h:commandButton value="Edit" action="#{detentionController.editDetention()}"/>
-                <h:button value="Cancel" outcome="cancel"/>
-            </h:form>
-        </div>       
+                    <tr>
+                        <td><h:outputText value="Type of Detention: " /></td>
+                        <td><h:selectOneMenu value="#{detentionController.detention.type}">
+                                <f:selectItem itemValue="Afternoon" itemLabel="Afternoon"/>
+                                <f:selectItem itemValue="Morning" itemLabel="Morning"/>
+                                <f:selectItem itemValue="Saturday" itemLabel="Saturday"/>
+                                <f:selectItem itemValue="Lunchtime" itemLabel="Lunchtime"/>
+                            </h:selectOneMenu></td>
+                    </tr>
+                               
+                    <tr>
+                        <td><h:outputText value="Department: " /></td>
+                        <td><h:selectOneMenu value="#{detentionController.detention.dept}">
+                                <f:selectItem itemValue="Computing" itemLabel="Computing"/>
+                                <f:selectItem itemValue="Math" itemLabel="Math"/>
+                                <f:selectItem itemValue="English" itemLabel="English"/>
+                                <f:selectItem itemValue="Science" itemLabel="Science"/>
+                                <f:selectItem itemValue="HSIE" itemLabel="HSIE"/>
+                            </h:selectOneMenu></td>
+                    </tr>
+                                
+                    <tr>
+                        <td><h:outputText value="Reason: " /></td>
+                        <td><h:inputText value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason!"/></td>
+                    </tr>
+                    <tr>
+                        <h:inputHidden value="#{detentionController.detention.id}"/>
+                        <td><h:commandButton value="Edit" action="#{detentionController.editDetention()}"/></td>
+                        <td><h:button value="Cancel" outcome="cancel"/></td>
+                    </tr>
+                </table>
+                </div>
+                </h:form>
     </h:body>
     </ui:define>>
 </ui:composition>

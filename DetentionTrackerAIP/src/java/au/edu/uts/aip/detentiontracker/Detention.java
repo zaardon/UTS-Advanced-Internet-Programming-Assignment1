@@ -6,6 +6,8 @@
 
 package au.edu.uts.aip.detentiontracker;
 
+import javax.validation.constraints.*;
+
 /**
  *
  * @author Alex
@@ -31,6 +33,9 @@ public class Detention {
         this.id = id;
     }
     
+    //Only allows letters and single white spaces/dashes (in the case of double names)
+    @Pattern(regexp="[A-Za-z -]*")
+    @Size(min = 1)
     public String getFName() {
         return fname;
     }
@@ -39,6 +44,9 @@ public class Detention {
         this.fname = fname;
     }
 
+    //Only allows letters and single white spaces/dashes (in the case of double names)
+    @Pattern(regexp="[A-Za-z -]*")
+    @Size(min = 1)
     public String getLName() {
         return lname;
     }
@@ -71,6 +79,9 @@ public class Detention {
         this.dept = dept;
     }
 
+    //Only allows numbers, letters, dashes and single white spaces
+    @Pattern(regexp="[A-Za-z 0-9-]*")
+    @Size(min = 1, max = 40)
     public String getReason() {
         return reason;
     }
