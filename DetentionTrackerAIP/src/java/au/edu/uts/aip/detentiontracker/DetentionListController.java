@@ -27,7 +27,7 @@ public class DetentionListController implements Serializable {
     //}
     
     public ArrayList<Detention> getAllDetentions() {
-            return new DetentionListDatabase().findDBAll();
+            return new DetentionListDatabase().findAllDetentions();
     }
     
     //public int sizeOfDetentionList(){

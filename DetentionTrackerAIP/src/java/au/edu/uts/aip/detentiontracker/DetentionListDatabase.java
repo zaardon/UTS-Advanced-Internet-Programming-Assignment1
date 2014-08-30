@@ -7,7 +7,6 @@ package au.edu.uts.aip.detentiontracker;
 
 import java.io.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,27 +22,27 @@ public class DetentionListDatabase implements Serializable {
     private static final String SELECT_DETENTION =
             "select DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason " +
             "from detentions ";
-    private static final String ACCOUNT_ALL = SELECT_DETENTION;
+    private static final String ALL_DETENTIONS = SELECT_DETENTION;
 
-    
+    private int nextUsedIDNum = generateDBUniqueID();
+
+    public int getNextUsedIDNum() {
+        nextUsedIDNum++;
+        return nextUsedIDNum;
+    }
     
     // Helper to generate unique identifiers
-    private static int idGenerator;
+    private static int idGenerator = new DetentionListDatabase().generateDBUniqueID();
+    
     private static synchronized int generateUniqueId() {
         idGenerator++;
         return idGenerator;
     }
     
-    private static LinkedHashMap<Integer, Detention> detentions = new LinkedHashMap<>();
-    
-    //public static Collection<Detention> findAll() {
-    //    return detentions.values();
-    //}
-    
-    //public static void create(Detention detention) {
-    //    detention.setId(generateUniqueId());
-    //    detentions.put(detention.getId(), detention);
-    //}
+    private int generateDBUniqueID()
+    {
+        return findHighestIDNumber(findAllDetentions());      
+    }
     
     public static void createDetention(Detention detention){
         detention.setId(generateUniqueId());
@@ -61,8 +60,7 @@ public class DetentionListDatabase implements Serializable {
         } catch (NamingException | SQLException e) {
             System.out.println(e);
         }       
-    }
-    
+    }  
     
     
     public Detention readDetention(int index) {
@@ -84,12 +82,6 @@ public class DetentionListDatabase implements Serializable {
         return tmpDet;
     }
    
-
-    
-    public static void update(Detention detention) {
-        detentions.put(detention.getId(), detention);
-        
-    }
     
     public static void updateDetention(Detention detention){
         String updateStatement = "UPDATE detentions " +
@@ -144,13 +136,13 @@ public class DetentionListDatabase implements Serializable {
      * @return a list containing every row of the database
      * @throws DataStoreException if an exception occurred while communicating with the database.
      */
-    public ArrayList<Detention> findDBAll(){ // throws DataStoreException 
+    public ArrayList<Detention> findAllDetentions(){ // throws DataStoreException 
         ArrayList<Detention> results = new ArrayList<>();
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(ACCOUNT_ALL)) {
+                 ResultSet rs = stmt.executeQuery(ALL_DETENTIONS)) {
 
                 while (rs.next()) {
                     results.add(createRowDTO(rs));
@@ -160,5 +152,22 @@ public class DetentionListDatabase implements Serializable {
             
         }
         return results;
+    }
+    
+    private int findHighestIDNumber(ArrayList<Detention> detentions)
+    {
+        int idMax = 0;
+        
+        for(Detention det : detentions)
+        {
+            if(idMax <= det.getId())
+            {
+                idMax = det.getId();
+            }
+        }
+        System.out.println(idMax);
+        
+        return idMax;
+        
     }
 }
