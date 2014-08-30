@@ -15,8 +15,6 @@ import javax.validation.constraints.*;
 public class Detention {
     
     private int id;
-
-
     private String fname;
     private String lname;
     private int year;

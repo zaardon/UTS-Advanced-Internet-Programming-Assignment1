@@ -25,15 +25,15 @@ public class DetentionController implements Serializable {
      * @param index the unique database id of the detention to retrieve
      */
     public void loadDetention(int index) {
-        detention = DetentionListDatabase.read(index);
+        detention = new DetentionListDatabase().readDetention(index);
     }
-    
+     
     /**
      * Save the current detention as a new record in the database.
      * @return a redirect to view the whole waiting list
      */
     public String createDetention() {
-        DetentionListDatabase.create(detention);
+        DetentionListDatabase.createDetention(detention);
         return "view?faces-redirect=true";
     }
     
@@ -42,7 +42,7 @@ public class DetentionController implements Serializable {
      * @return a redirect to view the whole waiting list
      */
     public String editDetention() {
-        DetentionListDatabase.update(detention);
+        DetentionListDatabase.updateDetention(detention);
         return "view?faces-redirect=true";
     }
     
@@ -50,13 +50,13 @@ public class DetentionController implements Serializable {
      * Delete the record from the database that matches the current detention's database id.
      * @return a redirect to view the whole waiting list
      */
-    public String removeDetention(int detention) {
-        DetentionListDatabase.delete(detention);
+    public String removeDetention(int index) {
+        DetentionListDatabase.removeDetention(index);
         return "view?faces-redirect=true";
     }
     
-    public String removeDetention() {
-        DetentionListDatabase.delete(detention.getId());
-        return "view?faces-redirect=true";
-    }    
+    //public String removeDetention() {
+    //    DetentionListDatabase.removeDetention(detention.getId());
+    //    return "view?faces-redirect=true";
+    //}    
 }

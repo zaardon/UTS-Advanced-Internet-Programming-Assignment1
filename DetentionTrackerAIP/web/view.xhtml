@@ -15,8 +15,8 @@ View Detentions
         <h1>Current Detentions</h1>        
         <div align="center">
             
-            <h:form rendered="#{detentionListController.sizeOfDetentionList() != 0}">
-                <h:dataTable border="1" var="detention"  value="#{detentionListController.detentions}">
+            <h:form rendered="#{detentionListController.sizeOfDetentionList()!= 0}">
+                <h:dataTable border="1" var="detention"  value="#{detentionListController.allDetentions}">
             <h:column>
                 <f:facet name="header">
                     First Name
