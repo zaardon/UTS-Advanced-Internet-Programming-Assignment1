@@ -17,18 +17,15 @@ Create a Detention
     <table>
         <tr>
             <td><h:outputText value="Username: " /></td>
-            <td><h:inputText /> </td>
+            <td><h:inputText value="#{loginController.login.username}"/> </td>
         </tr>
         <tr>
             <td><h:outputText value="Password: " /></td>
-            <td><h:inputSecret /></td>
+            <td><h:inputSecret value="#{loginController.login.password}"/></td>
         </tr>
-        <tr>
-            <td><h:outputText value="Retype Password: " /></td>
-            <td><h:inputSecret /></td>
-        </tr>
+
         <td> </td>
-        <td><h:commandButton value="Create Account" />
+        <td><h:commandButton value="Create Account" action="#{loginController.createUser}"/>
         </td>
 
     </table>

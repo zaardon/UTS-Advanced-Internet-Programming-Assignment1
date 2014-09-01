@@ -165,7 +165,7 @@ public class DetentionListDatabase implements Serializable {
                 idMax = det.getId();
             }
         }
-        System.out.println(idMax);
+        //System.out.println(idMax);
         
         return idMax;
         

@@ -17,14 +17,14 @@ Create a Detention
     <table>
         <tr>
             <td><h:outputText value="Username: " /></td>
-            <td><h:inputText /> </td>
+            <td><h:inputText value="#{loginController.username}"/> </td>
         </tr>
         <tr>
             <td><h:outputText value="Password: " /></td>
-            <td><h:inputSecret /></td>
+            <td><h:inputSecret value="#{loginController.password}"/></td>
         </tr>
         <td> </td>
-        <td><h:commandButton value="Login" />
+        <td><h:commandButton value="Login" action="#{loginController.login}"/>
         </td>
 
     </table>
