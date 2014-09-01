@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 public class LoginDAO implements Serializable {
    
     private static final String JNDI_NAME = "jdbc/detentiontracker";
-    private static final String SELECT_LOGIN = "select UserName, Password from logins WHERE UserName = ";
+    private static final String SELECT_LOGIN = "select * from logins WHERE UserName = ";
         
         
     public static void createUser(Login login) throws NoSuchAlgorithmException {
@@ -45,11 +45,11 @@ public class LoginDAO implements Serializable {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(SELECT_LOGIN + username)) {
+                 ResultSet rs = stmt.executeQuery(SELECT_LOGIN)) {
 
                 while (rs.next()) {
+                    System.out.println(rs.getString("UserName"));
                     if(rs.getString("UserName").equals(username)){
-                        System.out.println("Inserted");
                         return true;
                     }
                 }
