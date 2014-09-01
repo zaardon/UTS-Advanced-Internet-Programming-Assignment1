@@ -6,6 +6,9 @@
 
 package au.edu.uts.aip.detentiontracker;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author Alex
@@ -15,6 +18,8 @@ public class Login {
     private String username;
     private String password;
     
+    @Pattern(regexp="[a-zA-Z_0-9]*")
+    @Size(min = 1)
     public String getUsername() {
         return username;
     }
@@ -23,6 +28,8 @@ public class Login {
         this.username = username;
     }
     
+    @Pattern(regexp="[A-Za-z 0-9-]*")
+    @Size(min = 1)
     public String getPassword(){
         return password;
     }

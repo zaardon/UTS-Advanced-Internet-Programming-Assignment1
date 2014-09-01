@@ -9,6 +9,7 @@ package au.edu.uts.aip.detentiontracker;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import javax.enterprise.context.*;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.*;
 import javax.servlet.ServletException;
@@ -51,7 +52,7 @@ public class LoginController implements Serializable {
     }
     
     
-    public String login()  throws NoSuchAlgorithmException  {
+    public String login(){
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
         
@@ -65,4 +66,17 @@ public class LoginController implements Serializable {
           return null;
         }
     }
+    
+    public String logout() throws ServletException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+        try{
+            request.logout();
+        }
+        catch (ServletException e) {
+            context.addMessage(null, new FacesMessage(e.getMessage()));
+        }
+        return "login?faces-redirect=true";
+    }
+    
 }

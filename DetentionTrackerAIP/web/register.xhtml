@@ -17,11 +17,13 @@ Create a Detention
     <table>
         <tr>
             <td><h:outputText value="Username: " /></td>
-            <td><h:inputText value="#{loginController.login.username}"/> </td>
+            <td><h:inputText id="username" value="#{loginController.login.username}" validatorMessage="You must enter a valid username!"/> </td>
+            <td><h:message for="username"/></td>
         </tr>
         <tr>
             <td><h:outputText value="Password: " /></td>
-            <td><h:inputSecret value="#{loginController.login.password}"/></td>
+            <td><h:inputSecret id="password" value="#{loginController.login.password}" validatorMessage="You must enter a valid password!"/></td>
+            <td><h:message for="password"/></td>
         </tr>
 
         <td> </td>

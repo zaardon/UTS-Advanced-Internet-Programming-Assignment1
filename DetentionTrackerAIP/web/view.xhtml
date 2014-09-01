@@ -73,7 +73,12 @@ View Detentions
         </h:dataTable>
             </h:form>
             <h:outputText rendered="#{detentionListController.sizeOfDetentionList() == 0}" value="No detentions to view!" />
-        </div>       
+        </div>
+        <h:form>
+                <ui:insert name="footer">
+                    <ui:include src="/WEB-INF/templates/footer.xhtml" />
+                </ui:insert>
+        </h:form>
     </h:body>
     </ui:define>
 </ui:composition>
