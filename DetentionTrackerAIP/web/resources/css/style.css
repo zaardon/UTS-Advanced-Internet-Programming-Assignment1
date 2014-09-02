@@ -1,0 +1,21 @@
+.data {
+font-size: x-large;
+font: sans-serif ;
+
+}
+
+.normal{
+    text-align: center;
+    font: sans-serif;
+    font-size: large;
+
+}
+
+
+.button{   
+    padding-right: 10px;
+    padding-left: 10px;
+    outline: none;  
+    
+    
+}

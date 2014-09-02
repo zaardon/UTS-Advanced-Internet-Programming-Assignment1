@@ -11,62 +11,64 @@ xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 View Detentions
 </ui:define>
     <ui:define name="content">
+        <h:head>
+            <h:outputStylesheet  name="style.css" library="css" />
+        </h:head>
     <h:body>
         <h1>Current Detentions</h1>        
         <div align="center">
             
             <h:form rendered="#{detentionListController.sizeOfDetentionList()!= 0}">
-                <h:dataTable border="1" var="detention"  value="#{detentionListController.allDetentions}">
+                <h:dataTable columnClasses="normal,normal,normal,normal,normal,normal,button,button" rowClasses="" styleClass="data" border="1" var="detention"  value="#{detentionListController.allDetentions}">
             <h:column>
                 <f:facet name="header">
-                    First Name
+                    <h:outputText value="First Name"/>
                 </f:facet>
-                <h:outputText value="#{detention.FName}"/>
+                <h:outputText value="#{detention.FName}" style="normal"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    Last Name
+                    <h:outputText value="Last Name"/>
                 </f:facet>
                 <h:outputText value="#{detention.LName}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    Year
+                    <h:outputText value="Year"/>
                 </f:facet>
                 <h:outputText value="#{detention.year}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    Type
+                    <h:outputText value="Type"/>
                 </f:facet>
                 <h:outputText value="#{detention.type}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    Department
+                    <h:outputText value="Department"/>
                 </f:facet>
                 <h:outputText value="#{detention.dept}"/>
             </h:column>
                 
             <h:column>
-                <f:facet name="header">
-                    Reason
+                <f:facet name="header" >
+                    <h:outputText value="Reason"/>
                 </f:facet>
                 <h:outputText value="#{detention.reason}"/>
             </h:column>
                 
             <h:column>
-
                 <h:button value="Edit" outcome="edit">
                     <f:param name="index" value="#{detention.id}"/>
                 </h:button>
             </h:column> 
                 
-            <h:column>
+            <h:column >
                 <h:commandButton value="Remove" action="#{detentionController.removeDetention(detention.id)}" />
             
             </h:column>        
