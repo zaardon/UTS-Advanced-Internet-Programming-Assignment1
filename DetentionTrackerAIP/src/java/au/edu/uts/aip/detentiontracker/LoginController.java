@@ -47,7 +47,9 @@ public class LoginController implements Serializable {
      * @return a redirect to view the whole waiting list
      */
     public String createUser()  throws NoSuchAlgorithmException  {
-        LoginDAO.createUser(login);
+        if(!LoginDAO.userExists(login.getUsername())){
+            LoginDAO.createUser(login);
+        }
         return "login?faces-redirect=true";
     }
     

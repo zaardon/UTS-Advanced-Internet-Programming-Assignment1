@@ -19,12 +19,10 @@ import javax.sql.DataSource;
 public class LoginDAO implements Serializable {
    
     private static final String JNDI_NAME = "jdbc/detentiontracker";
-    private static final String SELECT_LOGIN = "select * from logins WHERE UserName = ";
+    private static final String SEARCH_ALL_USERS = "select * from logins ";
         
         
     public static void createUser(Login login) throws NoSuchAlgorithmException {
-        if(!userExists(login.getUsername())){
-            System.out.println("Inserted");
         String insertStatement = "INSERT INTO logins " +
                 "(UserName, Password) " +
                 "VALUES ( '"+login.getUsername()+"', '"+EncryptionUtility.hash256(login.getPassword())+"')";
@@ -36,8 +34,7 @@ public class LoginDAO implements Serializable {
 
         } catch (NamingException | SQLException e) {
             System.out.println(e);
-        }
-        }
+        }       
     }          
 
     public static boolean userExists(String username){
@@ -45,10 +42,9 @@ public class LoginDAO implements Serializable {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(SELECT_LOGIN)) {
+                 ResultSet rs = stmt.executeQuery(SEARCH_ALL_USERS)) {
 
                 while (rs.next()) {
-                    System.out.println(rs.getString("UserName"));
                     if(rs.getString("UserName").equals(username)){
                         return true;
                     }
@@ -57,7 +53,6 @@ public class LoginDAO implements Serializable {
         } catch (NamingException | SQLException e) {
             //throw new DataStoreException(e);
         }
-        System.out.println("User doesnt exist");
         return false;
     }
 }
