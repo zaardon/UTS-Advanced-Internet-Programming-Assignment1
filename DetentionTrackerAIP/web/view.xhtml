@@ -19,57 +19,57 @@ View Detentions
         <div align="center">
             
             <h:form rendered="#{detentionListController.sizeOfDetentionList()!= 0}">
-                <h:dataTable columnClasses="normal,normal,normal,normal,normal,normal,button,button" rowClasses="" styleClass="data" border="1" var="detention"  value="#{detentionListController.allDetentions}">
+                <h:dataTable styleClass="stdRowText" border="1" var="detention"  value="#{detentionListController.allDetentions}">
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="First Name"/>
+                    <h:outputText value="First Name" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.FName}" style="normal"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Last Name"/>
+                    <h:outputText value="Last Name" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.LName}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Year"/>
+                    <h:outputText value="Year" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.year}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Type"/>
+                    <h:outputText value="Type" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.type}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Department"/>
+                    <h:outputText value="Department" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.dept}"/>
             </h:column>
                 
             <h:column>
                 <f:facet name="header" >
-                    <h:outputText value="Reason"/>
+                    <h:outputText value="Reason" styleClass="stdRowHeader"/>
                 </f:facet>
                 <h:outputText value="#{detention.reason}"/>
             </h:column>
                 
             <h:column>
-                <h:button value="Edit" outcome="edit">
+                <h:button value="Edit" styleClass="stdButton" outcome="edit">
                     <f:param name="index" value="#{detention.id}"/>
                 </h:button>
             </h:column> 
                 
             <h:column >
-                <h:commandButton value="Remove" action="#{detentionController.removeDetention(detention.id)}" />
+                <h:commandButton value="Remove" styleClass="stdButton" action="#{detentionController.removeDetention(detention.id)}" />
             
             </h:column>        
         </h:dataTable>
