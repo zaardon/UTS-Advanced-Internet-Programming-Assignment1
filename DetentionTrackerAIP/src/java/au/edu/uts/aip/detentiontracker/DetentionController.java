@@ -61,6 +61,7 @@ public class DetentionController implements Serializable {
     }
         
     public int sizeOfDetentionList(){
+        System.out.println(getAllDetentions().size());
         return getAllDetentions().size();
     } 
 }

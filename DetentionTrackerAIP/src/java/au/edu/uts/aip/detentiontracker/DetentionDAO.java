@@ -60,11 +60,9 @@ public class DetentionDAO implements Serializable {
         } catch (NamingException | SQLException e) {
             System.out.println(e);
         }       
-    }  
-    
+    }     
     
     public DetentionDTO readDetention(int index) {
-
         DetentionDTO tmpDet = new DetentionDTO();
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
@@ -117,8 +115,7 @@ public class DetentionDAO implements Serializable {
             System.out.println(e);
         }       
     }
-    
-    
+       
      private DetentionDTO createRowDTO(ResultSet rs) throws SQLException {
         DetentionDTO result = new DetentionDTO();
         result.setId(rs.getInt("DetentionID"));
@@ -131,11 +128,6 @@ public class DetentionDAO implements Serializable {
         return result;
     }
 
-    /**
-     * Retrieves all accounts from the database as a complete list of Data Transfer Objects.
-     * @return a list containing every row of the database
-     * @throws DataStoreException if an exception occurred while communicating with the database.
-     */
     public ArrayList<DetentionDTO> findAllDetentions(){ // throws DataStoreException 
         ArrayList<DetentionDTO> results = new ArrayList<>();
         try {
@@ -156,8 +148,7 @@ public class DetentionDAO implements Serializable {
     
     private int findHighestIDNumber(ArrayList<DetentionDTO> detentions)
     {
-        int idMax = 0;
-        
+        int idMax = 0;       
         for(DetentionDTO det : detentions)
         {
             if(idMax <= det.getId())
@@ -165,9 +156,6 @@ public class DetentionDAO implements Serializable {
                 idMax = det.getId();
             }
         }
-        //System.out.println(idMax);
-        
-        return idMax;
-        
+        return idMax;   
     }
 }

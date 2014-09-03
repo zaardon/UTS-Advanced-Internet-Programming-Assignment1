@@ -21,7 +21,6 @@ public class DetentionDTO {
     private String type;
     private String dept;
     private String reason;
-
     
     public int getId() {
         return id;
