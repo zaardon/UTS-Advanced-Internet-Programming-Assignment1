@@ -24,11 +24,13 @@ Edit a Detention
                         <td><h:outputText value="First Name: " /></td>
                         <td><h:inputText id="fname" value="#{detentionController.detention.FName}" 
                                          validatorMessage="You must enter a first name!"/> </td>
+                        <td><h:message for="fname"/></td>
                     </tr>
                     <tr>
                         <td><h:outputText value="Last Name: " /></td>
-                        <td><h:inputText id="sname" value="#{detentionController.detention.LName}" 
+                        <td><h:inputText id="lname" value="#{detentionController.detention.LName}" 
                                          validatorMessage="You must enter a last name"/></td>
+                        <td><h:message for="lname" /></td>
                     </tr>
 
                     <tr>
@@ -66,7 +68,8 @@ Edit a Detention
                                 
                     <tr>
                         <td><h:outputText value="Reason: " /></td>
-                        <td><h:inputText value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason!"/></td>
+                        <td><h:inputText id="reason" value="#{detentionController.detention.reason}" validatorMessage="You must enter a reason!"/></td>
+                        <td><h:message for="reason"/></td>
                     </tr>
                     <tr>
                         <h:inputHidden value="#{detentionController.detention.id}"/>

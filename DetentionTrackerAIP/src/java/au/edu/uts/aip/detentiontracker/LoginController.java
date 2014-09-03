@@ -21,9 +21,9 @@ public class LoginController implements Serializable {
 
     private String username;
     private String password;
-    private Login login = new Login();
+    private LoginDTO login = new LoginDTO();
 
-    public Login getLogin(){
+    public LoginDTO getLogin(){
         return login;
     }
     public String getUsername() {

@@ -14,9 +14,9 @@ import javax.inject.*;
 @RequestScoped
 public class DetentionController implements Serializable {
 
-    private Detention detention = new Detention();
+    private DetentionDTO detention = new DetentionDTO();
 
-    public Detention getDetention() {
+    public DetentionDTO getDetention() {
         return detention;
     }
     
@@ -25,7 +25,7 @@ public class DetentionController implements Serializable {
      * @param index the unique database id of the detention to retrieve
      */
     public void loadDetention(int index) {
-        detention = new DetentionListDatabase().readDetention(index);
+        detention = new DetentionDAO().readDetention(index);
     }
      
     /**
@@ -33,7 +33,7 @@ public class DetentionController implements Serializable {
      * @return a redirect to view the whole waiting list
      */
     public String createDetention() {
-        DetentionListDatabase.createDetention(detention);
+        DetentionDAO.createDetention(detention);
         return "view?faces-redirect=true";
     }
     
@@ -42,7 +42,7 @@ public class DetentionController implements Serializable {
      * @return a redirect to view the whole waiting list
      */
     public String editDetention() {
-        DetentionListDatabase.updateDetention(detention);
+        DetentionDAO.updateDetention(detention);
         return "view?faces-redirect=true";
     }
     
@@ -51,12 +51,12 @@ public class DetentionController implements Serializable {
      * @return a redirect to view the whole waiting list
      */
     public String removeDetention(int index) {
-        DetentionListDatabase.removeDetention(index);
+        DetentionDAO.removeDetention(index);
         return "view?faces-redirect=true";
     }
     
     //public String removeDetention() {
-    //    DetentionListDatabase.removeDetention(detention.getId());
+    //    DetentionDAO.removeDetention(detention.getId());
     //    return "view?faces-redirect=true";
     //}    
 }

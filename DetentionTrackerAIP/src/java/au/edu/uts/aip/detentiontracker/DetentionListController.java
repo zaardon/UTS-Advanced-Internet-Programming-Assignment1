@@ -22,8 +22,8 @@ import javax.inject.*;
 @RequestScoped
 public class DetentionListController implements Serializable {
 
-    public ArrayList<Detention> getAllDetentions() {
-            return new DetentionListDatabase().findAllDetentions();
+    public ArrayList<DetentionDTO> getAllDetentions() {
+            return new DetentionDAO().findAllDetentions();
     }
         
     public int sizeOfDetentionList(){

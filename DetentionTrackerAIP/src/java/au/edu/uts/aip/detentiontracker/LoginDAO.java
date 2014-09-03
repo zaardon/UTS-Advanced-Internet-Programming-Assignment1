@@ -22,7 +22,7 @@ public class LoginDAO implements Serializable {
     private static final String SEARCH_ALL_USERS = "select * from logins ";
         
         
-    public static void createUser(Login login) throws NoSuchAlgorithmException {
+    public static void createUser(LoginDTO login) throws NoSuchAlgorithmException {
         String insertStatement = "INSERT INTO logins " +
                 "(UserName, Password) " +
                 "VALUES ( '"+login.getUsername()+"', '"+EncryptionUtility.hash256(login.getPassword())+"')";
