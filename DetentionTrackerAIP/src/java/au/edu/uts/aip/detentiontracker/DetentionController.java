@@ -7,6 +7,7 @@
 package au.edu.uts.aip.detentiontracker;
 
 import java.io.*;
+import java.util.ArrayList;
 import javax.enterprise.context.*;
 import javax.inject.*;
 
@@ -55,8 +56,11 @@ public class DetentionController implements Serializable {
         return "view?faces-redirect=true";
     }
     
-    //public String removeDetention() {
-    //    DetentionDAO.removeDetention(detention.getId());
-    //    return "view?faces-redirect=true";
-    //}    
+    public ArrayList<DetentionDTO> getAllDetentions() {
+            return new DetentionDAO().findAllDetentions();
+    }
+        
+    public int sizeOfDetentionList(){
+        return getAllDetentions().size();
+    } 
 }
