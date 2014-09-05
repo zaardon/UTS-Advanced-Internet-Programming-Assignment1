@@ -16,6 +16,10 @@ public class LoginDTO {
     private String username;
     private String password;
     
+    /**
+    * Only allows letters and numbers for a username
+    * @return a username
+    */
     @Pattern(regexp="[a-zA-Z_0-9]*")
     @Size(min = 1)
     public String getUsername() {
@@ -26,7 +30,11 @@ public class LoginDTO {
         this.username = username;
     }
     
-    @Pattern(regexp="[A-Za-z 0-9-]*")
+    /**
+    * Only allows letters and numbers for a password
+    * @return a password
+    */
+    @Pattern(regexp="[a-zA-Z_0-9]*")
     @Size(min = 1)
     public String getPassword(){
         return password;
