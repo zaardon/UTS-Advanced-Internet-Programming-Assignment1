@@ -80,7 +80,7 @@ public class LoginController implements Serializable {
             request.logout();
         }
         catch (ServletException e) {
-            context.addMessage(null, new FacesMessage(e.getMessage()));
+            displayErrorMessage("Unable to log out at this time.");
         }
         return "login?faces-redirect=true";
     }

@@ -10,12 +10,15 @@ Welcome!
 </ui:define>
     <ui:define name="content">  
         <h:form>
+        <h:head>
+            <h:outputStylesheet  name="style.css" library="css" />
+        </h:head>
             <h:body >
-                <p align="center" >Please select what you would like to do from above</p>
+                <h1>Welcome!</h1>
+                <p class="stdRowHeader" >Please select what you would like to do from above.</p>
                 <ui:insert name="footer">
                     <ui:include src="/WEB-INF/templates/footer.xhtml" />
                 </ui:insert>
-        
             </h:body>
         </h:form>
     </ui:define>
