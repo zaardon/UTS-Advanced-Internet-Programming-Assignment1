@@ -5,7 +5,6 @@
  */
 package au.edu.uts.aip.detentiontracker;
 
-import com.sun.xml.ws.tx.at.v10.types.PrepareResponse;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,11 +20,17 @@ public class DetentionDAO implements Serializable {
 
     
     private static final String JNDI_NAME = "jdbc/detentiontracker";
-    private static final String SELECT_DETENTION =
+    private static final String SELECT_DETENTIONS =
             "select DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason " +
             "from detentions ";
-    private static final String ALL_DETENTIONS = SELECT_DETENTION;
+    private static final String BY_ID = "WHERE DetentionID = ?";
+    private static final String DELETE_DETENTION = "DELETE FROM detentions ";
+    private static final String UPDATE_DETENTION = "UPDATE detentions SET FirstName = ?, LastName = ?, " +
+                "YearGroup = ?, DetentionType = ?, Department = ?, Reason = ?"; 
 
+    private static final String INSERT_NEW_DETENTION = "INSERT INTO detentions "+
+            "(DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
     private int nextUsedIDNum = generateDBUniqueID();
 
     public int getNextUsedIDNum() {
@@ -48,13 +53,10 @@ public class DetentionDAO implements Serializable {
     
     public static void createDetention(DetentionDTO detention){
         detention.setId(generateUniqueId());
-        String insertStatement = "INSERT INTO detentions " +
-                "(DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
         try{
         DataSource ds = InitialContext.doLookup(JNDI_NAME);
         Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(insertStatement);
+        PreparedStatement ps = conn.prepareStatement(INSERT_NEW_DETENTION);
         ps.setInt(1, detention.getId());
         ps.setString(2, detention.getFName());
         ps.setString(3, detention.getLName());
@@ -70,39 +72,51 @@ public class DetentionDAO implements Serializable {
         }
     }     
     
-    public DetentionDTO readDetention(int index) {
-        DetentionDTO tmpDet = new DetentionDTO();
+    public DetentionDTO readDetention(int detentionID) {
+        try {
+            DataSource ds = InitialContext.doLookup(JNDI_NAME);
+            try (Connection conn = ds.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(SELECT_DETENTIONS + BY_ID)) {
+
+                ps.setInt(1, detentionID);
+                
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // detention found
+                        return createDetentionDTO(rs);
+                    } 
+                }
+            }
+        } catch (NamingException | SQLException e) {
+            
+        }
+        return null;
+    }
+   
+    
+    public ArrayList<DetentionDTO> findAllDetentions(){ // throws DataStoreException 
+        ArrayList<DetentionDTO> results = new ArrayList<>();
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(SELECT_DETENTION + "WHERE DetentionID = "+ index)) {
+                 ResultSet rs = stmt.executeQuery(SELECT_DETENTIONS)) {
 
-                while(rs.next()){
-                 tmpDet = createRowDTO(rs);
+                while (rs.next()) {
+                    results.add(createDetentionDTO(rs));
                 }
             }
         } catch (NamingException | SQLException e) {
-            System.out.println(e);
+            
         }
-        return tmpDet;
+        return results;
     }
-   
     
-    public static void updateDetention(DetentionDTO detention){
-        String updateStatement = "UPDATE detentions " +
-                "SET FirstName = ?, " +
-                "LastName = ?, " +
-                "YearGroup = ?, " +
-                "DetentionType = ?, " +
-                "Department = ?, " +
-                "Reason = ? "+
-                "WHERE DetentionID = ?";
-                
+    public static void updateDetention(DetentionDTO detention){                
         try{
         DataSource ds = InitialContext.doLookup(JNDI_NAME);
         Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(updateStatement);
+        PreparedStatement ps = conn.prepareStatement(UPDATE_DETENTION + BY_ID);
         
         ps.setString(1, detention.getFName());
         ps.setString(2, detention.getLName());
@@ -120,12 +134,10 @@ public class DetentionDAO implements Serializable {
     }
 
     public static void removeDetention(int detentionID){      
-        String deleteStatement = "DELETE FROM detentions " +
-                "WHERE DetentionID = ?";
         try{
         DataSource ds = InitialContext.doLookup(JNDI_NAME);
         Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(deleteStatement);
+        PreparedStatement ps = conn.prepareStatement(DELETE_DETENTION + BY_ID);
         
         ps.setInt(1, detentionID);
         ps.executeUpdate();
@@ -136,7 +148,7 @@ public class DetentionDAO implements Serializable {
         }
     }
        
-     private DetentionDTO createRowDTO(ResultSet rs) throws SQLException {
+     private DetentionDTO createDetentionDTO(ResultSet rs) throws SQLException {
         DetentionDTO result = new DetentionDTO();
         result.setId(rs.getInt("DetentionID"));
         result.setFName(rs.getString("FirstName"));
@@ -148,23 +160,6 @@ public class DetentionDAO implements Serializable {
         return result;
     }
 
-    public ArrayList<DetentionDTO> findAllDetentions(){ // throws DataStoreException 
-        ArrayList<DetentionDTO> results = new ArrayList<>();
-        try {
-            DataSource ds = InitialContext.doLookup(JNDI_NAME);
-            try (Connection conn = ds.getConnection();
-                 Statement stmt = conn.createStatement();
-                 ResultSet rs = stmt.executeQuery(ALL_DETENTIONS)) {
-
-                while (rs.next()) {
-                    results.add(createRowDTO(rs));
-                }
-            }
-        } catch (NamingException | SQLException e) {
-            
-        }
-        return results;
-    }
     
     private int findHighestIDNumber(ArrayList<DetentionDTO> detentions)
     {
