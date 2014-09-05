@@ -49,8 +49,10 @@ public class LoginController implements Serializable {
     public String createUser()  throws NoSuchAlgorithmException  {
         if(!LoginDAO.userExists(login.getUsername())){
             LoginDAO.createUser(login);
+            return "login?faces-redirect=true";
         }
-        return "login?faces-redirect=true";
+        displayErrorMessage("Username already exists OR you have entered incorrect characters");
+        return null;
     }
     
     

@@ -4,9 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <style>
-            h1 {text-align:center; color: #000000}
-        </style>
+
         <h:outputStylesheet  name="style.css" library="css" />
         <title><ui:insert name="title">Default Title</ui:insert></title>
     </h:head>
@@ -15,17 +13,17 @@
         <thead class="templatePageTableHeader">
             <tr>
                 <th class="templatePageTableHeaderText" colspan="3">
-                    <h1> Detention Tracker 1.0</h1>
+                    <h1 class="h1"> Detention Tracker 1.0</h1>
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td class="templatePageTableRow">
-                    <a href="create.xhtml"> <h1>Create Detention</h1></a>
+                    <a href="create.xhtml"> <h1 class="h1">Create Detention</h1></a>
                 </td>
                 <td class="templatePageTableRow">
-                    <a href="view.xhtml"><font color="000000"> <h1>View Detentions</h1></font></a>
+                    <a href="view.xhtml"><font color="000000"> <h1 class="h1">View Detentions</h1></font></a>
                 </td>
             </tr>            
         </tbody>

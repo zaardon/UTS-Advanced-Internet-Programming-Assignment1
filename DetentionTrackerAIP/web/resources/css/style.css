@@ -1,7 +1,6 @@
 .viewData {
 font-size: large;
 font: sans-serif ;
-
 }
 
 .stdRowHeader{
@@ -43,19 +42,13 @@ font: sans-serif ;
 .stdLink{
     color: blue;
     font: sans-serif;
-    font-size: large;
-}
-
-.h1HeaderPage{
-    
+    font-size: x-large;
 }
 
 .templatePageTable{
     border-color: #000000;
     width: 100%;
-
-    border: 3px;
-    
+    border: 3px;    
 }
 
 .templatePageTableHeader{
@@ -65,7 +58,6 @@ font: sans-serif ;
 }
 
 .templatePageTableHeaderText{
-
     text-align: center;
 }
 
@@ -76,6 +68,6 @@ font: sans-serif ;
 
 .h1{
     text-align: center;
-    font-size: x-large;
+    font-size: xx-large;
     font-family: sans-serif;
 }
