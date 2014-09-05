@@ -10,6 +10,9 @@ xmlns:f="http://java.sun.com/jsf/core">
 Create a Detention
 </ui:define>
     <ui:define name="content">
+        <h:head>
+            <h:outputStylesheet  name="style.css" library="css" />
+        </h:head>
     <h:body>
         <h1>Create an Account</h1>               
 <h:form>
@@ -18,12 +21,12 @@ Create a Detention
         <tr>
             <td><h:outputText value="Username: " /></td>
             <td><h:inputText id="username" value="#{loginController.login.username}" validatorMessage="You must enter a valid username!"/> </td>
-            <td><h:message for="username"/></td>
+            <td><h:message for="username" styleClass="createInputError"/></td>
         </tr>
         <tr>
             <td><h:outputText value="Password: " /></td>
             <td><h:inputSecret id="password" value="#{loginController.login.password}" validatorMessage="You must enter a valid password!"/></td>
-            <td><h:message for="password"/></td>
+            <td><h:message for="password" styleClass="createInputError"/></td>
         </tr>
 
         <td> </td>

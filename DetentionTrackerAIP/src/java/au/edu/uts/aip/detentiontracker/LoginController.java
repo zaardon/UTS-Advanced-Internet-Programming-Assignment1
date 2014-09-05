@@ -63,10 +63,14 @@ public class LoginController implements Serializable {
           return "welcome?faces-redirect=true";
           
         } catch (ServletException e) {
-          //showError("Incorrect username or password (or you may not have properly configured aipRealm)");
-          e.printStackTrace();
+          displayErrorMessage("Username or password is incorrect!");
           return null;
         }
+    }
+    
+    private void displayErrorMessage(String message) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(message));
     }
     
     public String logout() throws ServletException {
