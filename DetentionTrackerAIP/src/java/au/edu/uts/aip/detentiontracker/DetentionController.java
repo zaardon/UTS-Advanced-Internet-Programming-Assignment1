@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The controller for the Detentions aspect of the web site
  */
 
 package au.edu.uts.aip.detentiontracker;
@@ -21,17 +19,17 @@ public class DetentionController implements Serializable {
         return detention;
     }
     
-       /**
-     * Load the details of a detention from the database.
-     * @param index the unique database id of the detention to retrieve
+     /**
+     * Loads a detention by its unique ID
+     * @param detentionID the unique detention id
      */
-    public void loadDetention(int index) {
-        detention = new DetentionDAO().readDetention(index);
+    public void loadDetention(int detentionID) {
+        detention = new DetentionDAO().readDetention(detentionID);
     }
      
     /**
-     * Save the current detention as a new record in the database.
-     * @return a redirect to view the whole waiting list
+     * Creates a new detention record in the Detentions table
+     * @return a redirect that takes the user back to the view detentions page
      */
     public String createDetention() {
         DetentionDAO.createDetention(detention);
@@ -39,8 +37,8 @@ public class DetentionController implements Serializable {
     }
     
     /**
-     * Update the record in the database whose database id matches that of the current group.
-     * @return a redirect to view the whole waiting list
+     * Updates a chosen detention with new values
+     * @return a redirect that takes the user back to the view detentions page
      */
     public String editDetention() {
         DetentionDAO.updateDetention(detention);
@@ -48,18 +46,27 @@ public class DetentionController implements Serializable {
     }
     
     /**
-     * Delete the record from the database that matches the current detention's database id.
-     * @return a redirect to view the whole waiting list
+     * Deletes a chosen record from the Detentions table
+     * @param detentionID the unique detention id
+     * @return a redirect that takes the user back to the view detentions page
      */
-    public String removeDetention(int index) {
-        DetentionDAO.removeDetention(index);
+    public String removeDetention(int detentionID) {
+        DetentionDAO.removeDetention(detentionID);
         return "view?faces-redirect=true";
     }
     
+    /**
+     * Generates a complete list of current detentions from the Detentions table
+     * @return an array list of detentions that is displayed on the web page
+     */
     public ArrayList<DetentionDTO> getAllDetentions() {
             return new DetentionDAO().findAllDetentions();
     }
-        
+    
+    /**
+     * Used to determine how many detentions are currently recorded in the Detentions table
+     * @return returns the amount of current detentions
+     */
     public int sizeOfDetentionList(){
         return getAllDetentions().size();
     } 

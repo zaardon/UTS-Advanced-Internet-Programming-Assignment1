@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *The Login table Data Access Object
  */
 package au.edu.uts.aip.detentiontracker;
 
@@ -15,15 +13,18 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class LoginDAO implements Serializable {
-   
+public class LoginDAO implements Serializable {  
     private static final String JNDI_NAME = "jdbc/detentiontracker";
     private static final String ALL_USERS = "select * from logins ";
     private static final String BY_USERNAME = "WHERE UserName = ?";
     private static final String INSERT_NEW_USER = "INSERT INTO logins (UserName, Password)" +
-                                "Values (?, ?)";
+                                "Values (?, ?)";      
         
-        
+    /**
+     * Creates a new user in the login table
+     * @param login the DTO login object
+     * @throws NoSuchAlgorithmException if the encryption algorithm fails
+     */
     public static void createUser(LoginDTO login) throws NoSuchAlgorithmException {
        try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
@@ -37,21 +38,25 @@ public class LoginDAO implements Serializable {
         }           
     }    
 
+    /**
+     * Searches the login table for a username.
+     * @param username the user name that is to be searched in the table
+     * @return true or false on whether the user exists or not
+     */
     public static boolean userExists(String username){
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(ALL_USERS + BY_USERNAME)) {
+                PreparedStatement ps = conn.prepareStatement(ALL_USERS + BY_USERNAME)) {
                 ps.setString(1, username);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        // user found
                         return true;
                     } 
                 }
             }
         } catch (NamingException | SQLException e) {
-            
+            System.out.println(e);
         }
         return false;
     }

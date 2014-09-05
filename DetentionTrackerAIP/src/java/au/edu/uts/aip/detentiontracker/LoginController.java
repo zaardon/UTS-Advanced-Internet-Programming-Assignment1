@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The log in controller for the log in aspect for the web site
  */
 
 package au.edu.uts.aip.detentiontracker;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
 import javax.enterprise.context.*;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -22,6 +21,7 @@ public class LoginController implements Serializable {
     private String username;
     private String password;
     private LoginDTO login = new LoginDTO();
+    private Logger log = Logger.getLogger(this.getClass().getName());
 
     public LoginDTO getLogin(){
         return login;
@@ -43,38 +43,56 @@ public class LoginController implements Serializable {
     }
      
     /**
-     * Save the current detention as a new record in the database.
-     * @return a redirect to view the whole waiting list
+     * Creates a new a new user in the login table
+     * @return Will either return the user to the log in page (if creation was successful)
+     * OR will return user back to the register page with an error message
+     * @throws NoSuchAlgorithmException This error is thrown if the password encryption fails
      */
     public String createUser()  throws NoSuchAlgorithmException  {
         if(!LoginDAO.userExists(login.getUsername())){
             LoginDAO.createUser(login);
             return "login?faces-redirect=true";
         }
-        displayErrorMessage("Username already exists OR you have entered incorrect characters");
+
+        log.info("Unable to create user account");
+        displayMessage("Username already exists OR you have entered incorrect characters");
         return null;
     }
     
-    
+    /**
+     * Will log the user into the web site using container managed security
+     * @return Will take the user to the Welcome page or will return the user back to
+     * the log in page with an error message
+     */
     public String login(){
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
-        
+        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();       
         try {
           request.login(username, password);
           return "welcome?faces-redirect=true";
           
         } catch (ServletException e) {
-          displayErrorMessage("Username or password is incorrect!");
+          log.info(e.toString());
+          displayMessage("Username or password is incorrect!");
+          
           return null;
         }
     }
     
-    private void displayErrorMessage(String message) {
+    /**
+     * Displays a message on a chosen web page
+     * @param message The message that is to be displayed to the user
+     */
+    private void displayMessage(String message) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(message));
     }
     
+    /**
+     * Logs the user out of the web site
+     * @return returns the user to the log in page
+     * @throws ServletException if the servlet fails to log out
+     */
     public String logout() throws ServletException {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
@@ -82,7 +100,8 @@ public class LoginController implements Serializable {
             request.logout();
         }
         catch (ServletException e) {
-            displayErrorMessage("Unable to log out at this time.");
+            log.info(e.toString());
+            displayMessage("Unable to log out at this time.");
         }
         return "login?faces-redirect=true";
     }

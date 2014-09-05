@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Detention Transfer Object
  */
 
 package au.edu.uts.aip.detentiontracker;
@@ -30,7 +28,10 @@ public class DetentionDTO {
         this.id = id;
     }
     
-    //Only allows letters and single white spaces/dashes (in the case of double names)
+    /**
+    * Only allows letters and single white spaces/dashes (in the case of double names) for a first name
+    * @return a first name
+    */
     @Pattern(regexp="[A-Za-z -]*")
     @Size(min = 1)
     public String getFName() {
@@ -41,7 +42,10 @@ public class DetentionDTO {
         this.fname = fname;
     }
 
-    //Only allows letters and single white spaces/dashes (in the case of double names)
+    /**
+    * Only allows letters and single white spaces/dashes (in the case of double names) for a last name
+    * @return a last name
+    */
     @Pattern(regexp="[A-Za-z -]*")
     @Size(min = 1)
     public String getLName() {
@@ -76,7 +80,10 @@ public class DetentionDTO {
         this.dept = dept;
     }
 
-    //Only allows numbers, letters, dashes and single white spaces
+    /**
+    * Only allows numbers, letters, dashes and single white spaces for a reason
+    * @return a reason
+    */
     @Pattern(regexp="[A-Za-z 0-9-]*")
     @Size(min = 1, max = 40)
     public String getReason() {
