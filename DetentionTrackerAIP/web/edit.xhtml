@@ -27,19 +27,19 @@ Edit a Detention
                     <tr>
                         <td><h:outputText value="First Name: " styleClass="createHeader" /></td>
                         <td><h:inputText id="fname" value="#{detentionController.detention.FName}" 
-                                         validatorMessage="You must enter a first name!" styleClass="createInput"/> </td>
+                                         validatorMessage="You must enter a valid first name!" styleClass="createInput"/> </td>
                         <td><h:message for="fname" styleClass="createInputError"/></td>
                     </tr>
                     <tr>
                         <td><h:outputText value="Last Name: " styleClass="createHeader" /></td>
                         <td><h:inputText id="lname" value="#{detentionController.detention.LName}" 
-                                         validatorMessage="You must enter a last name" styleClass="createInput"/></td>
+                                         validatorMessage="You must enter a valid last name" styleClass="createInput"/></td>
                         <td><h:message for="lname" styleClass="createInputError" /></td>
                     </tr>
 
                     <tr>
                         <td><h:outputText value="Year: " styleClass="createHeader" /></td>
-                        <td><h:selectOneMenu value="#{detentionController.detention.year}" validatorMessage="You must enter a year group!" styleClass="createInput">
+                        <td><h:selectOneMenu value="#{detentionController.detention.year}" styleClass="createInput">
                             <f:selectItem itemValue="07" itemLabel="07"/>
                             <f:selectItem itemValue="08" itemLabel="08"/>
                             <f:selectItem itemValue="09" itemLabel="09"/>
@@ -72,14 +72,14 @@ Edit a Detention
                                 
                     <tr>
                         <td><h:outputText value="Reason: " styleClass="createHeader" /></td>
-                        <td><h:inputText id="reason" value="#{detentionController.detention.reason}" styleClass="createInput" validatorMessage="You must enter a reason!"/></td>
+                        <td><h:inputText id="reason" value="#{detentionController.detention.reason}" styleClass="createInput" validatorMessage="You must enter a valid reason (check your input!)"/></td>
                         <td><h:message for="reason" styleClass="createInputError" /></td>
                     </tr>
                     <tr>
                         <h:inputHidden value="#{detentionController.detention.id}"/>
                         <td>
                             <h:button value="Cancel"  styleClass="stdButton" outcome="cancel"/>
-                            <h:commandButton value="Edit" styleClass="stdButton" action="#{detentionController.editDetention()}"/>
+                            <h:commandButton value="Save" styleClass="stdButton" action="#{detentionController.editDetention()}"/>
                         </td>
                         
                     </tr>

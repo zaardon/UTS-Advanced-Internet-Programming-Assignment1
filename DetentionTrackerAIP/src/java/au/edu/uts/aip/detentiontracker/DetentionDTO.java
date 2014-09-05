@@ -29,10 +29,10 @@ public class DetentionDTO {
     }
     
     /**
-    * Only allows letters and single white spaces/dashes (in the case of double names) for a first name
+    * Only allows letters and single white spaces/dashes/apostrophes (in the case of double names) for a first name
     * @return a first name
     */
-    @Pattern(regexp="[A-Za-z -]*")
+    @Pattern(regexp="[A-Za-z -']*")
     @Size(min = 1)
     public String getFName() {
         return fname;
@@ -43,10 +43,10 @@ public class DetentionDTO {
     }
 
     /**
-    * Only allows letters and single white spaces/dashes (in the case of double names) for a last name
+    * Only allows letters and single white spaces/dashes/apostrophes (in the case of double names) for a last name
     * @return a last name
     */
-    @Pattern(regexp="[A-Za-z -]*")
+    @Pattern(regexp="[A-Za-z -']*")
     @Size(min = 1)
     public String getLName() {
         return lname;
@@ -81,10 +81,10 @@ public class DetentionDTO {
     }
 
     /**
-    * Only allows numbers, letters, dashes and single white spaces for a reason
+    * Only allows numbers, letters, dashes, apostrophes, colons and single white spaces for a reason
     * @return a reason
     */
-    @Pattern(regexp="[A-Za-z 0-9-]*")
+    @Pattern(regexp="[A-Za-z 0-9-':]*")
     @Size(min = 1, max = 40)
     public String getReason() {
         return reason;
