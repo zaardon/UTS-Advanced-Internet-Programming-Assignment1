@@ -50,12 +50,13 @@ public class LoginController implements Serializable {
      */
     public String createUser()  throws NoSuchAlgorithmException  {
         if(!LoginDAO.userExists(login.getUsername())){
+            //If new username does not already exists...
             LoginDAO.createUser(login);
             return "login?faces-redirect=true";
         }
-
+        //else if it does already exists...
         log.info("Unable to create user account");
-        displayMessage("Username already exists OR you have entered incorrect characters");
+        displayMessage("Username already exists OR you have entered incorrect characters (letters & numbers only!)");
         return null;
     }
     
@@ -68,14 +69,14 @@ public class LoginController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();       
         try {
-          request.login(username, password);
-          return "welcome?faces-redirect=true";
-          
+            //If the log in is successful..
+            request.login(username, password);
+            return "welcome?faces-redirect=true";         
         } catch (ServletException e) {
-          log.info(e.toString());
-          displayMessage("Username or password is incorrect!");
-          
-          return null;
+            //else...
+            log.info(e.toString());
+            displayMessage("Username or password is incorrect!");          
+            return null;
         }
     }
     

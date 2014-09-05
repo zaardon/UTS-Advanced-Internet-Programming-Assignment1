@@ -15,20 +15,17 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DetentionDAO implements Serializable {
-
-    
     private static final String JNDI_NAME = "jdbc/detentiontracker";
     private static final String SELECT_DETENTIONS =
-            "select DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason " +
-            "from detentions ";
+        "select DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason " +
+         "from detentions ";
     private static final String BY_ID = "WHERE DetentionID = ?";
     private static final String DELETE_DETENTION = "DELETE FROM detentions ";
     private static final String UPDATE_DETENTION = "UPDATE detentions SET FirstName = ?, LastName = ?, " +
-                "YearGroup = ?, DetentionType = ?, Department = ?, Reason = ?"; 
-
+        "YearGroup = ?, DetentionType = ?, Department = ?, Reason = ?"; 
     private static final String INSERT_NEW_DETENTION = "INSERT INTO detentions "+
-            "(DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason)" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        "(DetentionID, FirstName, LastName, YearGroup, DetentionType, Department, Reason)" +
+        " VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     //Creates a unique id based on the amount of current detentions
     private static int idGenerator = new DetentionDAO().generateDetentionID();
@@ -58,18 +55,18 @@ public class DetentionDAO implements Serializable {
     public static void createDetention(DetentionDTO detention){
         detention.setId(getNextUsedIDNum());
         try{
-        DataSource ds = InitialContext.doLookup(JNDI_NAME);
-        Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(INSERT_NEW_DETENTION);
-        ps.setInt(1, detention.getId());
-        ps.setString(2, detention.getFName());
-        ps.setString(3, detention.getLName());
-        ps.setInt(4, detention.getYear());
-        ps.setString(5, detention.getType());
-        ps.setString(6, detention.getDept());
-        ps.setString(7, detention.getReason());
-        ps.executeUpdate();
-        
+            DataSource ds = InitialContext.doLookup(JNDI_NAME);
+            Connection conn = ds.getConnection();
+            //an insertion query that uses prepared statements...
+            PreparedStatement ps = conn.prepareStatement(INSERT_NEW_DETENTION);
+            ps.setInt(1, detention.getId());
+            ps.setString(2, detention.getFName());
+            ps.setString(3, detention.getLName());
+            ps.setInt(4, detention.getYear());
+            ps.setString(5, detention.getType());
+            ps.setString(6, detention.getDept());
+            ps.setString(7, detention.getReason());
+            ps.executeUpdate();       
         }
         catch(SQLException | NamingException e){
             System.out.println(e);
@@ -84,14 +81,13 @@ public class DetentionDAO implements Serializable {
     public DetentionDTO readDetention(int detentionID) {
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
+            //A select query that uses prepared statements...
             try (Connection conn = ds.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(SELECT_DETENTIONS + BY_ID)) {
-
+                PreparedStatement ps = conn.prepareStatement(SELECT_DETENTIONS + BY_ID)) {
                 ps.setInt(1, detentionID);
-                
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        // detention found
+                        //Detention found...
                         return createDetentionDTO(rs);
                     } 
                 }
@@ -99,6 +95,7 @@ public class DetentionDAO implements Serializable {
         } catch (NamingException | SQLException e) {
             System.out.println(e);
         }
+        //Detention not found...
         return null;
     }
    
@@ -113,8 +110,8 @@ public class DetentionDAO implements Serializable {
             try (Connection conn = ds.getConnection();
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery(SELECT_DETENTIONS)) {
-
                 while (rs.next()) {
+                    //For each detention item found, add it to the array list...
                     results.add(createDetentionDTO(rs));
                 }
             }
@@ -130,19 +127,18 @@ public class DetentionDAO implements Serializable {
      */
     public static void updateDetention(DetentionDTO detention){                
         try{
-        DataSource ds = InitialContext.doLookup(JNDI_NAME);
-        Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(UPDATE_DETENTION + BY_ID);
-        
-        ps.setString(1, detention.getFName());
-        ps.setString(2, detention.getLName());
-        ps.setInt(3, detention.getYear());
-        ps.setString(4, detention.getType());
-        ps.setString(5, detention.getDept());
-        ps.setString(6, detention.getReason());
-        ps.setInt(7, detention.getId());
-        ps.executeUpdate();
-        
+            DataSource ds = InitialContext.doLookup(JNDI_NAME);
+            Connection conn = ds.getConnection();
+            //An update query that uses prepared statements and searches by a unique ID...
+            PreparedStatement ps = conn.prepareStatement(UPDATE_DETENTION + BY_ID);
+            ps.setString(1, detention.getFName());
+            ps.setString(2, detention.getLName());
+            ps.setInt(3, detention.getYear());
+            ps.setString(4, detention.getType());
+            ps.setString(5, detention.getDept());
+            ps.setString(6, detention.getReason());
+            ps.setInt(7, detention.getId());
+            ps.executeUpdate();    
         }
         catch(SQLException | NamingException e){
             System.out.println(e);
@@ -155,13 +151,12 @@ public class DetentionDAO implements Serializable {
      */
     public static void removeDetention(int detentionID){      
         try{
-        DataSource ds = InitialContext.doLookup(JNDI_NAME);
-        Connection conn = ds.getConnection();
-        PreparedStatement ps = conn.prepareStatement(DELETE_DETENTION + BY_ID);
-        
-        ps.setInt(1, detentionID);
-        ps.executeUpdate();
-        
+            DataSource ds = InitialContext.doLookup(JNDI_NAME);
+            Connection conn = ds.getConnection();
+            //A delete query that uses prepared statements and searches by a unique id...
+            PreparedStatement ps = conn.prepareStatement(DELETE_DETENTION + BY_ID);
+            ps.setInt(1, detentionID);
+            ps.executeUpdate();
         }
         catch(SQLException | NamingException e){
             System.out.println(e);
@@ -197,8 +192,7 @@ public class DetentionDAO implements Serializable {
         for(DetentionDTO det : detentions)
         {
             //Goes through each detention ID and compares each object to find the highest number.
-            if(idMax <= det.getId())
-            {
+            if(idMax <= det.getId()){
                 idMax = det.getId();
             }
         }

@@ -29,8 +29,10 @@ public class LoginDAO implements Serializable {
        try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             Connection conn = ds.getConnection();
+            //Inserts a new user with a prepared statement...
             PreparedStatement ps = conn.prepareStatement(INSERT_NEW_USER);
             ps.setString(1, login.getUsername());
+            //Encrypts the password using has256 encoding...
             ps.setString(2, EncryptionUtility.hash256(login.getPassword()));
             ps.executeUpdate();
         } catch (NamingException | SQLException e) {
@@ -47,10 +49,12 @@ public class LoginDAO implements Serializable {
         try {
             DataSource ds = InitialContext.doLookup(JNDI_NAME);
             try (Connection conn = ds.getConnection();
+                //Searches all usernames in the logins table by username with a prepared statement...
                 PreparedStatement ps = conn.prepareStatement(ALL_USERS + BY_USERNAME)) {
                 ps.setString(1, username);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
+                        //if found return true...
                         return true;
                     } 
                 }
@@ -58,6 +62,7 @@ public class LoginDAO implements Serializable {
         } catch (NamingException | SQLException e) {
             System.out.println(e);
         }
+        //If not found return false...
         return false;
     }
 }

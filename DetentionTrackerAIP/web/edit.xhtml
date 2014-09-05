@@ -77,8 +77,10 @@ Edit a Detention
                     </tr>
                     <tr>
                         <h:inputHidden value="#{detentionController.detention.id}"/>
-                        <td><h:button value="Cancel"  styleClass="stdButton" outcome="cancel"/></td>
-                        <td><h:commandButton value="Edit" styleClass="stdButton" action="#{detentionController.editDetention()}"/></td>
+                        <td>
+                            <h:button value="Cancel"  styleClass="stdButton" outcome="cancel"/>
+                            <h:commandButton value="Edit" styleClass="stdButton" action="#{detentionController.editDetention()}"/>
+                        </td>
                         
                     </tr>
                 </table>

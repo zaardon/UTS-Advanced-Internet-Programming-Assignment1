@@ -65,8 +65,11 @@ Create a Detention
             <td><h:message for="reason" styleClass="createInputError"/></td>
         </tr>
         <tr>
+        
         <td> </td>
-        <td><h:commandButton value="Create" styleClass="stdButton" action="#{detentionController.createDetention()}"/>
+        <td>
+            <h:button value="Cancel"  styleClass="stdButton" outcome="cancel"/>
+            <h:commandButton value="Create" styleClass="stdButton" action="#{detentionController.createDetention()}"/>
         </td>
         </tr>
     </table>
