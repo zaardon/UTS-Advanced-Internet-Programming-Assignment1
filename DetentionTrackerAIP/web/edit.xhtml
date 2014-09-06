@@ -9,20 +9,17 @@ xmlns:f="http://java.sun.com/jsf/core">
 <ui:define name="title">
 Edit a Detention
 </ui:define>
-    <f:metadata>
-        <f:viewAction action="#{detentionController.loadDetention(param.index)}"/>
-    </f:metadata>
-    
-    <ui:define name="content">
-        
-        <h:head>
-            <h:outputStylesheet  name="style.css" library="css" />
-        </h:head>
+<f:metadata>
+    <f:viewAction action="#{detentionController.loadDetention(param.index)}"/>
+</f:metadata>    
+<ui:define name="content">     
+    <h:head>
+        <h:outputStylesheet  name="style.css" library="css" />
+    </h:head>
     <h:body>
         <h1 class="h1">Edit a Detention</h1>        
-
-            <h:form>
-                <div align="center">
+        <h:form>
+            <div align="center">
                 <table>
                     <tr>
                         <td><h:outputText value="First Name: " styleClass="createHeader" /></td>
@@ -36,7 +33,6 @@ Edit a Detention
                                          validatorMessage="You must enter a valid last name" styleClass="createInput"/></td>
                         <td><h:message for="lname" styleClass="createInputError" /></td>
                     </tr>
-
                     <tr>
                         <td><h:outputText value="Year: " styleClass="createHeader" /></td>
                         <td><h:selectOneMenu value="#{detentionController.detention.year}" styleClass="createInput">
@@ -47,8 +43,7 @@ Edit a Detention
                             <f:selectItem itemValue="11" itemLabel="11"/>
                             <f:selectItem itemValue="12" itemLabel="12"/>
                         </h:selectOneMenu></td>
-                    </tr>              
-                
+                    </tr>                              
                     <tr>
                         <td><h:outputText value="Type of Detention: " styleClass="createHeader" /></td>
                         <td><h:selectOneMenu value="#{detentionController.detention.type}" styleClass="createInput">
@@ -57,8 +52,7 @@ Edit a Detention
                                 <f:selectItem itemValue="Saturday" itemLabel="Saturday"/>
                                 <f:selectItem itemValue="Lunchtime" itemLabel="Lunchtime"/>
                             </h:selectOneMenu></td>
-                    </tr>
-                               
+                    </tr>                              
                     <tr>
                         <td><h:outputText value="Department: " styleClass="createHeader" /></td>
                         <td><h:selectOneMenu value="#{detentionController.detention.dept}" styleClass="createInput">
@@ -68,8 +62,7 @@ Edit a Detention
                                 <f:selectItem itemValue="Science" itemLabel="Science"/>
                                 <f:selectItem itemValue="HSIE" itemLabel="HSIE"/>
                             </h:selectOneMenu></td>
-                    </tr>
-                                
+                    </tr>                               
                     <tr>
                         <td><h:outputText value="Reason: " styleClass="createHeader" /></td>
                         <td><h:inputText id="reason" value="#{detentionController.detention.reason}" styleClass="createInput" validatorMessage="You must enter a valid reason (check your input!)"/></td>
@@ -80,15 +73,11 @@ Edit a Detention
                         <td>
                             <h:button value="Cancel"  styleClass="stdButton" outcome="cancel"/>
                             <h:commandButton value="Save" styleClass="stdButton" action="#{detentionController.editDetention()}"/>
-                        </td>
-                        
+                        </td>        
                     </tr>
                 </table>
-                </div>
-                
-                </h:form>
-        
-
+            </div>         
+        </h:form>
     </h:body>
-    </ui:define>>
+</ui:define>
 </ui:composition>

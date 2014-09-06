@@ -8,18 +8,18 @@ xmlns:h="http://xmlns.jcp.org/jsf/html">
 <ui:define name="title">
 Welcome!
 </ui:define>
-    <ui:define name="content">  
-        <h:form>
+<ui:define name="content">  
+    <h:form>
         <h:head>
             <h:outputStylesheet  name="style.css" library="css" />
         </h:head>
-            <h:body >
-                <h1 class="h1">Welcome!</h1>
-                <p class="stdRowHeader" >Please select what you would like to do from above.</p>
-                <ui:insert name="footer">
-                    <ui:include src="/WEB-INF/templates/footer.xhtml" />
-                </ui:insert>
-            </h:body>
-        </h:form>
-    </ui:define>
+        <h:body>
+            <h1 class="h1">Welcome!</h1>
+            <p class="stdRowHeader" >Please select what you would like to do from above.</p>
+            <ui:insert name="footer">
+                <ui:include src="/WEB-INF/templates/footer.xhtml" />
+            </ui:insert>
+        </h:body>
+    </h:form>
+</ui:define>
 </ui:composition>
