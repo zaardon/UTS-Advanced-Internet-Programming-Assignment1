@@ -18,16 +18,17 @@ Register
 <h:form>
     <div align="center">
                 <h:messages errorClass="info" styleClass="createInputError"/>
+
     <table>
         <tr>
             <td><h:outputText value="Username: " styleClass="createHeader" /></td>
-            <td><h:inputText id="username" styleClass="createInput" value="#{loginController.login.username}" validatorMessage="You must enter a valid username (letters & numbers only!)"/> </td>
-            <td><h:message for="username" styleClass="createInputError"/></td>
+            <td><h:inputText id="username" styleClass="createInput" value="#{loginController.login.username}" validatorMessage="You must enter a valid username (letters and numbers only!)"/> </td>
+            
         </tr>
         <tr>
             <td><h:outputText value="Password: " styleClass="createHeader"/></td>
-            <td><h:inputSecret id="password" styleClass="createInput" value="#{loginController.login.password}" validatorMessage="You must enter a valid password (letters & numbers only!)"/></td>
-            <td><h:message for="password" styleClass="createInputError"/></td>
+            <td><h:inputSecret id="password" styleClass="createInput" value="#{loginController.login.password}" validatorMessage="You must enter a valid password (letters and numbers only!)"/></td>
+            
         </tr>
 
         <td> </td>
